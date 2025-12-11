@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Queue Implementation in Python</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+      background-color: #ffffff;
+      color: #333;
+    }
+    h1 {
+      color: #0d6efd;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    pre {
+      background: #f8f9fa;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 14px;
+      border: 1px solid #e9ecef;
+      margin-top: 10px;
+    }
+    a.back {
+      display: inline-block;
+      margin-top: 20px;
+      color: #0d6efd;
+      text-decoration: none;
+    }
+    a.back:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Queue Implementation in Python</h1>
+
+  <p>A Queue is a linear data structure that follows the First-In-First-Out (FIFO) principle. This implementation uses a list to store items, with enqueue (add) at the end and dequeue (remove) from the front.</p>
+
+  <pre>
+# Queue Implementation in Python
+
+class Queue:
+    def __init__(self):
+        self.items = []
+    
+    def enqueue(self, item):
+        self.items.append(item)
+    
+    def dequeue(self):
+        if not self.is_empty():
+            return self.items.pop(0)  # Removes first item
+        return None
+    
+    def front(self):
+        if not self.is_empty():
+            return self.items[0]
+        return None
+    
+    def is_empty(self):
+        return len(self.items) == 0
+    
+    def size(self):
+        return len(self.items)
+    
+    def display(self):
+        print("Queue:", self.items)
+
+# Example usage
+if __name__ == "__main__":
+    q = Queue()
+    q.enqueue(10)
+    q.enqueue(20)
+    q.enqueue(30)
+    q.display()           # Output: [10, 20, 30]
+    print("Dequeued:", q.dequeue())  # Output: 10
+    q.display()           # Output: [20, 30]
+  </pre>
+
+  <a href="index.html" class="back">← Back to Home</a>
+
+</body>
+</html>
