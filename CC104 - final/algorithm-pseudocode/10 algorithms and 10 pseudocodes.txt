@@ -1,0 +1,238 @@
+1. Linear Search
+Searches for a target value by checking each element in order from start to end.
+Pseudocode:
+BEGIN
+    INPUT array, target
+    SET n = LENGTH(array)
+    FOR i = 0 TO n - 1 DO
+        IF array[i] = target THEN
+            OUTPUT "Found at index ", i
+            RETURN i
+        END IF
+    END FOR
+    OUTPUT "Not found"
+    RETURN -1
+END
+
+2. Binary Search
+Efficiently searches a sorted array by repeatedly dividing the search interval in half.
+Pseudocode:
+BEGIN
+    INPUT sorted_array, target
+    SET low = 0
+    SET high = LENGTH(sorted_array) - 1
+
+    WHILE low <= high DO
+        SET mid = (low + high) DIV 2
+
+        IF sorted_array[mid] = target THEN
+            OUTPUT "Found at index ", mid
+            RETURN mid
+        ELSE IF sorted_array[mid] < target THEN
+            SET low = mid + 1
+        ELSE
+            SET high = mid - 1
+        END IF
+    END WHILE
+
+    OUTPUT "Not found"
+    RETURN -1
+END
+
+3. Bubble Sort
+Repeatedly steps through the list, compares adjacent items, and swaps them if in wrong order.
+Pseudocode:
+BEGIN
+    INPUT array
+    SET n = LENGTH(array)
+
+    FOR i = 0 TO n - 2 DO
+        SET swapped = FALSE
+
+        FOR j = 0 TO n - 2 - i DO
+            IF array[j] > array[j + 1] THEN
+                SWAP array[j] AND array[j + 1]
+                SET swapped = TRUE
+            END IF
+        END FOR
+
+        IF swapped = FALSE THEN
+            BREAK
+        END IF
+    END FOR
+
+    OUTPUT "Sorted array: ", array
+END
+
+4. Selection Sort
+Finds the smallest element in the unsorted portion and swaps it with the first unsorted element.
+Pseudocode:
+BEGIN
+    INPUT array
+    SET n = LENGTH(array)
+
+    FOR i = 0 TO n - 2 DO
+        SET min_index = i
+
+        FOR j = i + 1 TO n - 1 DO
+            IF array[j] < array[min_index] THEN
+                SET min_index = j
+            END IF
+        END FOR
+
+        IF min_index ≠ i THEN
+            SWAP array[i] AND array[min_index]
+        END IF
+    END FOR
+
+    OUTPUT "Sorted array: ", array
+END
+
+5. Insertion Sort
+Builds the final sorted array one item at a time by inserting each element into its correct position.
+Pseudocode:
+BEGIN
+    INPUT array
+    SET n = LENGTH(array)
+
+    FOR i = 1 TO n - 1 DO
+        SET key = array[i]
+        SET j = i - 1
+
+        WHILE j ≥ 0 AND array[j] > key DO
+            SET array[j + 1] = array[j]
+            SET j = j - 1
+        END WHILE
+
+        SET array[j + 1] = key
+    END FOR
+
+    OUTPUT "Sorted array: ", array
+END
+
+6. Infix to Postfix Conversion
+Converts a standard infix expression (e.g., A + B) into postfix notation (e.g., A B +) using a stack.
+Pseudocode:
+BEGIN
+    INPUT infix_expression
+    INITIALIZE empty stack
+    INITIALIZE empty output string
+
+    FOR each character ch IN infix_expression DO
+        IF ch IS an operand THEN
+            APPEND ch TO output
+        ELSE IF ch = '(' THEN
+            PUSH ch TO stack
+        ELSE IF ch = ')' THEN
+            WHILE TOP OF stack ≠ '(' DO
+                POP from stack and APPEND to output
+            END WHILE
+            POP '(' from stack
+        ELSE IF ch IS an operator THEN
+            WHILE stack NOT empty AND
+                  PRECEDENCE(TOP of stack) ≥ PRECEDENCE(ch) DO
+                POP from stack and APPEND to output
+            END WHILE
+            PUSH ch TO stack
+        END IF
+    END FOR
+
+    WHILE stack NOT empty DO
+        POP from stack and APPEND to output
+    END WHILE
+
+    OUTPUT "Postfix: ", output
+END
+
+7. Postfix Evaluation
+Evaluates a postfix expression (e.g., 4 5 6 * +) using a stack to compute the result.
+Pseudocode:
+BEGIN
+    INPUT postfix_expression
+    INITIALIZE empty stack
+
+    FOR each token IN postfix_expression DO
+        IF token IS a number THEN
+            PUSH token TO stack
+        ELSE IF token IS an operator THEN
+            SET operand2 = POP from stack
+            SET operand1 = POP from stack
+
+            IF token = '+' THEN
+                SET result = operand1 + operand2
+            ELSE IF token = '-' THEN
+                SET result = operand1 - operand2
+            ELSE IF token = '*' THEN
+                SET result = operand1 * operand2
+            ELSE IF token = '/' THEN
+                SET result = operand1 / operand2
+            END IF
+
+            PUSH result TO stack
+        END IF
+    END FOR
+
+    SET final_result = POP from stack
+    OUTPUT "Result: ", final_result
+END
+
+8. Inorder Tree Traversal
+Visits nodes of a binary tree in the order: Left → Root → Right.
+Pseudocode:
+BEGIN
+    PROCEDURE Inorder(node)
+        IF node ≠ NULL THEN
+            Inorder(node.left)
+            OUTPUT node.value
+            Inorder(node.right)
+        END IF
+    END PROCEDURE
+
+    CALL Inorder(root)
+END
+
+9. Breadth-First Search (BFS)
+Explores a graph or tree level by level using a queue.
+Pseudocode:
+BEGIN
+    INPUT graph, start_node
+    INITIALIZE empty queue
+    INITIALIZE visited set (all nodes = FALSE)
+
+    ENQUEUE start_node
+    MARK start_node as visited
+
+    WHILE queue NOT empty DO
+        SET current = DEQUEUE from queue
+        OUTPUT current
+
+        FOR each neighbor OF current DO
+            IF neighbor NOT visited THEN
+                MARK neighbor as visited
+                ENQUEUE neighbor
+            END IF
+        END FOR
+    END WHILE
+END
+
+10. Depth-First Search (DFS)
+Explores a graph or tree by going as deep as possible down one branch before backtracking.
+Pseudocode:
+BEGIN
+    PROCEDURE DFS(node)
+        IF node = NULL THEN
+            RETURN
+        END IF
+
+        MARK node as visited
+        OUTPUT node.value
+
+        FOR each child OF node DO
+            IF child NOT visited THEN
+                DFS(child)
+            END IF
+        END FOR
+    END PROCEDURE
+
+    CALL DFS(start_node)
+END
