@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CC104 Final Project</title>
   <style>
+    /* Base styles */
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
       line-height: 1.6;
       background-color: #ffffff;
-      color: #333;
+      color: #333333;
+      transition: background-color 0.3s, color 0.3s;
     }
     h1 {
       color: #0d6efd;
@@ -42,9 +44,49 @@
       color: #6c757d;
       font-size: 0.9em;
     }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+    body.dark-mode h1,
+    body.dark-mode h2,
+    body.dark-mode a,
+    body.dark-mode .footer {
+      color: #bbdefb;
+    }
+    body.dark-mode h2 {
+      border-bottom-color: #444;
+    }
+    body.dark-mode a:hover {
+      color: #e3f2fd;
+    }
+
+    /* Toggle button */
+    #themeToggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1000;
+      padding: 6px 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      background: #f8f9fa;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    body.dark-mode #themeToggle {
+      background: #333;
+      color: #f0f0f0;
+      border-color: #555;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Dark/Light Toggle Button -->
+  <button id="themeToggle">🌙 Dark Mode</button>
 
   <h1>CC104 Final Project – Data Structures & Algorithms</h1>
 
@@ -62,7 +104,7 @@
   </ul>
 
   <div class="footer">
-      <p><em>Leader: Jasper Erinco </em></p>
+    <p><em>Leader: Jasper Erinco </em></p>
   <p><em>Members: Fernandez, Ma. Rachelle Ann C.
                   Azares, Mariner M.
                   Gabriel, Jessaline L.
@@ -70,10 +112,27 @@
                   Manuel, Rollyboy L.
                   Navarette, William Edward G
                   Galvez, Jerome, M.
-                  Del Monte, Kyle Brianth .
+                  Del Monte, Kyle Brianth G.
                   Eleazar, Mark Joseph P.
     <p>CC104 – Data Structures and Algorithms | College of Information Technology</p>
   </div>
+
+  <!-- Dark/Light Mode Script -->
+  <script>
+    // Check saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      document.getElementById('themeToggle').textContent = '☀️ Light Mode';
+    }
+
+    // Toggle theme
+    document.getElementById('themeToggle').addEventListener('click', function () {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      this.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+  </script>
 
 </body>
 </html>
